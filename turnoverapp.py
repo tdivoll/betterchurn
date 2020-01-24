@@ -30,7 +30,7 @@ def load_model(modelName):
   return model
 
 modelName = 'randomfor_week2'
-model = load_model(modelName
+model = load_model(modelName)
 
 st.title('Low-flow Nursing')
 st.header("Predicting RN turnover rates with staffing metrics, patient reviews, and employee sentiments")
