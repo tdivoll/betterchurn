@@ -12,14 +12,11 @@ st.header("Predicting RN turnover rates with staffing metrics, patient reviews, 
 
 
 #load pickled model
-file = open('/home/tjd/InsightFiles/randomfor_week2.sav', 'rb')
+file = open('/home/tjd/InsightFiles/turnover-app/betterchurn/randomfor_week2.sav', 'rb')
 pred_data = pd.read_pickle(file, compression=None)
 
-import pandas as pd
 
-
-
-data2 = pd.read_csv('/home/tjd/InsightFiles/TurnoverRates.csv')
+data2 = pd.read_csv('/home/tjd/InsightFiles/turnover-app/betterchurn/TurnoverRates.csv')
 columns = data2[['RN Turnover Rate in the Medical-Surgical Unit','RN Turnover Rate in the Critical Care Unit', 'RN Turnover Rate in the NICU', 'RN Turnover Rate in the Mother/Baby Unit']]
 
 
@@ -30,4 +27,4 @@ ax.set_xlim([0,100])
 st.bar_chart(data2[column], width = 7)
 
 
-st.dataframe(pd.read_csv('/home/tjd/InsightFiles/RelevantSurvey.csv'))
+st.dataframe(pd.read_csv('/home/tjd/InsightFiles/turnover-app/betterchurn/RelevantSurvey.csv'))
