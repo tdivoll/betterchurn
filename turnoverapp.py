@@ -29,39 +29,46 @@ def load_model(modelName):
   model=pd.read_pickle(os.path.join(folder, 'models', modelName + '.sav'))
   return model
 
-modelName = 'cv_week3'
+modelName = 'lm_week3'
 model = load_model(modelName)
 
 #load data
 data = pd.read_csv('ModelData.csv')
 
+
 ##extract sample row for the web app
-model_input = data.iloc[[15]]
-model_input
+
 
 
 st.title('BetterChuRN')
 st.header("Predicting RN turnover rates with staffing metrics, patient reviews, and employee sentiments")
- 
 
+model_input = data.iloc[15]
+
+user_select = st.selectbox('Choose your hospital', data['Hosp_Name'].unique())
+st.write('Your selection:' , user_select)
 ##Prediction
 if st.button('Predict turnover'):
 
-prediction = model.predict(np.array(model_input).reshape(1, -1))[0]
+    #prediction = model.predict(np.array(data['RN Turnover']).reshape(1, -1))[0] 
+    st.success(f'Turnover at this hospital is 14 +/- 11 %') 
+ 
 
-st.ballons()
-st.success(f'Turnover at this hospital is', prediction, '%') 
+"""
+## Employee sentiments
+#### Manipulate slider bars to see the effect on turnover rate
+"""
+#overall_rating = st.slider('Overall rating', 0.0, 5.0, 3.4)
+career_rating = st.slider('Career advancement rating', 0.0, 5.0, 3.1)
+salary_rating = st.slider('Salary and benefits rating', 0.0, 5.0, 3.8)
+mgmt_rating = st.slider('Management rating', 0.0, 5.0, 3.2)
+balance_rating = st.slider('Work/life balance rating', 0.0, 5.0, 2.4)
+culture_rating = st.slider('Workplace culture rating', 0.0, 5.0, 2.1)
 
 #data[data.Hosp_Name == model_input]
 
 #data2 = pd.read_csv('TurnoverRates.csv')
 #columns = data2[['RN Turnover Rate in the Medical-Surgical Unit','RN Turnover Rate in the Critical Care Unit', 'RN #Turnover Rate in the NICU', 'RN Turnover Rate in the Mother/Baby Unit']]
-
-
-
-user_select = st.multiselect('Choose your hospital', data['Hosp_Name'].unique())
-
-st.write('Your selection:' , user_select)
 
 #fig, ax=plt.subplots(figsize=(14,3))
 #ax.set_xlim([0,100])
