@@ -45,7 +45,12 @@ st.header("Predicting RN turnover rates with staffing metrics, patient reviews, 
  
 
 ##Prediction
+if st.button('Predict turnover'):
+
 prediction = model.predict(np.array(model_input).reshape(1, -1))[0]
+
+st.ballons()
+st.success(f'Turnover at this hospital is', prediction, '%') 
 
 #data[data.Hosp_Name == model_input]
 
@@ -54,7 +59,7 @@ prediction = model.predict(np.array(model_input).reshape(1, -1))[0]
 
 
 
-user_select = st.multiselect('Choose your hospital', data['Hosp_Name].unique())
+user_select = st.multiselect('Choose your hospital', data['Hosp_Name'].unique())
 
 st.write('Your selection:' , user_select)
 
