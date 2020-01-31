@@ -33,7 +33,7 @@ modelName = 'cv_week3'
 model = load_model(modelName)
 
 #load data
-data =pd.read_csv('ModelData.csv'
+data = pd.read_csv('ModelData.csv')
 
 ##extract sample row for the web app
 model_input = data.iloc[[15]]
@@ -54,11 +54,13 @@ prediction = model.predict(np.array(model_input).reshape(1, -1))[0]
 
 
 
-user_select = st.multiselect('Choose your hospital', data2.columns)
+user_select = st.multiselect('Choose your hospital', data['Hosp_Name].unique())
 
-fig, ax=plt.subplots(figsize=(14,3))
-ax.set_xlim([0,100])
-st.bar_chart(data2[column], width = 7)
+st.write('Your selection:' , user_select)
+
+#fig, ax=plt.subplots(figsize=(14,3))
+#ax.set_xlim([0,100])
+#st.bar_chart(data2[column], width = 7)
 
 
-st.dataframe(pd.read_csv('RelevantSurvey.csv'))
+#st.dataframe(pd.read_csv('RelevantSurvey.csv'))
