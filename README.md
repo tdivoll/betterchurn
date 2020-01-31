@@ -1,2 +1,4 @@
 # betterchurn
-Insight Project
+Insight Data Science Fellow Project - Boston 2020A
+
+This app
