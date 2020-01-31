@@ -29,23 +29,32 @@ def load_model(modelName):
   model=pd.read_pickle(os.path.join(folder, 'models', modelName + '.sav'))
   return model
 
-modelName = 'randomfor_week2'
+modelName = 'cv_week3'
 model = load_model(modelName)
-#
+
+#load data
+data =pd.read_csv('ModelData.csv'
+
+##extract sample row for the web app
+model_input = data.iloc[[15]]
+model_input
+
+
 st.title('BetterChuRN')
 st.header("Predicting RN turnover rates with staffing metrics, patient reviews, and employee sentiments")
+ 
+
+##Prediction
+prediction = model.predict(np.array(model_input).reshape(1, -1))[0]
+
+#data[data.Hosp_Name == model_input]
+
+#data2 = pd.read_csv('TurnoverRates.csv')
+#columns = data2[['RN Turnover Rate in the Medical-Surgical Unit','RN Turnover Rate in the Critical Care Unit', 'RN #Turnover Rate in the NICU', 'RN Turnover Rate in the Mother/Baby Unit']]
 
 
-#load pickled model
-#file = open('/home/tjd/InsightFiles/turnover-app/betterchurn/randomfor_week2.sav', 'rb')
-#pred_data = pd.read_pickle(file, compression=None)
 
-
-data2 = pd.read_csv('TurnoverRates.csv')
-columns = data2[['RN Turnover Rate in the Medical-Surgical Unit','RN Turnover Rate in the Critical Care Unit', 'RN Turnover Rate in the NICU', 'RN Turnover Rate in the Mother/Baby Unit']]
-
-
-column = st.multiselect('Choose your unit(s) of interest', data2.columns)
+user_select = st.multiselect('Choose your hospital', data2.columns)
 
 fig, ax=plt.subplots(figsize=(14,3))
 ax.set_xlim([0,100])
