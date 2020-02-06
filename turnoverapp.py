@@ -5,7 +5,7 @@ import os, sys
 import importlib.util
 import matplotlib.pyplot as plt
 import pickle
-import  chart_studio.plotly as ply
+import plotly.plotly as ply
 
 if len(sys.argv) > 1:
     folder = os.path.abspath(sys.argv[1])
