@@ -5,6 +5,7 @@ import os, sys
 import importlib.util
 import matplotlib.pyplot as plt
 import pickle
+import  plotly.express as px
 
 if len(sys.argv) > 1:
     folder = os.path.abspath(sys.argv[1])
