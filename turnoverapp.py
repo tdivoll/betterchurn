@@ -5,7 +5,7 @@ import os, sys
 import importlib.util
 import matplotlib.pyplot as plt
 import pickle
-import  plotly
+import  chart_studio.plotly as ply
 
 if len(sys.argv) > 1:
     folder = os.path.abspath(sys.argv[1])
@@ -122,7 +122,7 @@ if st.selectbox('Choose your hospital', ratings['Hosp_Name'].unique()):
 
     #import plotly.express as px
     fig2, ax = plt.subplots()
-    fig2 = plotly.histogram(ratings, x='rating_overall')
+    fig2 = ply.histogram(ratings, x='rating_overall')
     st.plotly_chart(fig2)
 
     h = user_select
