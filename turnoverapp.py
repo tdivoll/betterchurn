@@ -5,7 +5,6 @@ import os, sys
 import importlib.util
 import matplotlib.pyplot as plt
 import pickle
-import plotly_express as px
 import holoviews as hv
 import hvplot
 import hvplot.pandas # noqa: F401
