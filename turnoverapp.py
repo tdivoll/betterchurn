@@ -5,7 +5,19 @@ import os, sys
 import importlib.util
 import matplotlib.pyplot as plt
 import pickle
-import plotly.plotly as ply
+import plotly_express as px
+import holoviews as hv
+import hvplot
+import hvplot.pandas # noqa: F401
+from holoviews import opts
+hv.extension('bokeh', logo=False)
+
+import bokeh.models as bmo
+from bokeh.plotting import figure, show
+from bokeh.palettes import PuBu, Spectral5, Spectral6
+from bokeh.io import show, output_notebook
+from bokeh.models import ColumnDataSource, HoverTool, LabelSet, CategoricalColorMapper
+from bokeh.transform import factor_cmap, factor_mark
 
 if len(sys.argv) > 1:
     folder = os.path.abspath(sys.argv[1])
@@ -25,7 +37,7 @@ def format_url(s):
 	els = s.split("/")[-1].split(".")[0].split("_")
 	return " ".join(el for el in els).capitalize()
 
-@st.cache
+#@st.cache
 def load_model(modelName):
   model=pd.read_pickle(os.path.join(folder, 'models', modelName + '.sav'))
   return model
@@ -92,41 +104,104 @@ PerRNMS = st.number_input('Enter %/ RN in MS:',min_value=0, max_value=100, value
 vals = [vals[0], vals[1], vals[2], vals[3], vals[4], vals[5], vals[6], vals[7], vals[8], vals[9], vals[10], vals[11], vals[12], PerRNCC, PerRNconCC, PerRNconMS, vals[16], PerRNMS, RN_patient_critcare, RN_patient_medsurg, vals[20], vals[21], vals[22], vals[23], vals[24], vals[25], vals[26], vals[27], vals[28], vals[29], vals[30], vals[31], vals[32], vals[33], vals[34], vals[35], vals[36], vals[37], vals[38], vals[39], vals[40], vals[41], vals[42], vals[43], vals[44], vals[45], vals[46], vals[47], vals[48], vals[49], vals[50], vals[51], vals[52], vals[53], vals[54], vals[55], vals[56], vals[57], vals[58], vals[59], vals[60], vals[61], vals[62], vals[63], vals[64], vals[65], vals[66], vals[67], vals[68], vals[69], vals[70], vals[71], vals[72], vals[73], vals[74], vals[75], vals[76], vals[77], vals[78], vals[79], vals[80], vals[81], vals[82], vals[83], vals[84], vals[85], vals[86], vals[87], vals[88], vals[89], vals[90], vals[91], vals[92], vals[93], vals[94], vals[95], vals[96], vals[97], vals[98], vals[99], vals[100], vals[101], vals[102], vals[103], vals[104], vals[105]]
 #turn = data[(data['RN Turnover'].isin(user_select))]
 ##Prediction
-if st.button('Predict turnover'): 
-    #data2 = [RN_patient_critcare, RN_patient_medsurg, PerRNhospMS, PerRNhospCC, PerRN]
+if st.button('Predict turnover'):
     #prediction = model.predict(np.array(model_in).loc[user_select].values.reshape(1, -1))[0]
     
-    #prediction = model.predict(np.array['3','5','3','2','3','3','84','15573','25','79','72', '75', '0', '0', '8.05', '15', '57.53', '0', '6.53', '44.53', '13.36', '18.8', '2.5', '3','40.15002','22','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'].reshape(1, -1))[0]
     prediction=model.predict(np.array(vals).reshape(1, -1))[0]
     #st.success(f'Turnover at your hospital is:' )
     if prediction<1:
         st.markdown("""## Turnover at your hospital is ___**lower**___ than average.""")
-        st.markdown("""## Consider going to the sidebar to compare your ratings to the distributions of ratings for all hospitals. With such insights, you may find employee sentement areas to focus on.""")
+        st.markdown("""## Consider comparing your employee ratings to the distributions of ratings for all hospitals below. With such insights, you may find employee sentement areas to focus on.""")
     else:
         st.markdown("""## Turnover at your hospital is ___**higher**___ than average.""")
-        st. markdown("""## Consider going to the sidebar to compare your ratings to the distributions of ratings for all hospitals. With such insights, you may find  employee sentement areas to focus on.""")
+        st. markdown("""## Consider comparing your employee ratings to the distributions of ratings for all hospitals below. With such insights, you may find  employee sentement areas to focus on.""")
 st.markdown("""<br>""", unsafe_allow_html=True)   
 st.markdown("""<br>""", unsafe_allow_html=True)
-
 st.markdown(
 """
 # Employee sentiment areas
-### Choose your hospital from the dropdown to see where your ratings compare to the rest of the hospitals that submit data to the Illinois Hospital Report Cards
+### Choose your hospital from the dropdown to see where your ratings compare to the rest of the hospitals that submit data to the Illinois Hospital Report Cards. The boundary of yellow coloring indactes your mean employee rating.
 """)
 
 ratings = pd.read_csv('ReviewData.csv')
-user_select = ratings['Hosp_Name'].any()
-if st.selectbox('Choose your hospital', ratings['Hosp_Name'].unique()):
-    
+
+
+
+#if rowLoc:
+
+#fig=go.Figure()
+#fig
+#fig.add_histogram(x=hist_data)
+
+#py.iplot(fig, filename = 'Overall Rating by Employees')
+    #fig2, ax = plt.subplots()
+    #fig2 = px.histogram(ratings, x='rating_overall')
+    #h = rowLoc
+    #ax.axvline(h, color='black', linewidth=2)
+    #st.plotly_chart(fig2)
+user_select = st.selectbox('Choose your hospital:', ratings['Hosp_Name'].unique())
+filt = ratings["Hosp_Name"]==user_select
+#print(user_select)
+#print(filt)
+selected = ratings.loc[filt,'rating_overall'].mean()
+print (selected)
+
+if selected <3.5:
+    st.markdown(''' ## Your average rating is ___**lower**___ than average''')
+else:
+    st.markdown(''' ## Your average rating is ___**higher**___ than average''')
+
+
+#hist_data = [ratings['rating_overall']]
+#group_labels = ['Rating Score']
+#fig = ff.create_distplot(hist_data, group_labels, show_hist=False, show_curve=True, bin_size=.5)
+#fig.layout.update(width=800, bargap=0.01, xaxis_range= [0.5,5.5])
+#fig
+fig, ax = plt.subplots()
+colors=['blue','blue','red', 'red', 'red']
+bins=5
+#fig2 = ax.hist(x=ratings['rating_overall'])
+h = selected
+N, bins, patches = ax.hist(x=ratings['rating_overall'], edgecolor='white', bins=bins, linewidth=1)
+
+
+for i in range(0, int(h)):
+    patches[i].set_facecolor('y')    
+for i in range(int(h),int(h)):
+    patches[i].set_facecolor('black')
+for i in range(int(h), 5):
+    patches[i].set_facecolor('black')
+#ax.axvline(h, color='red', linewidth=3)
+#st.plotly_chart(fig2)
+st.pyplot(fig)
+#ax.axvline(x=selected)
+#rowLoc = ratings[ratings['Hosp_Name']==user_select].index.values.astype(int)[0]
+#ratings["Hospital Selected"] = 'No'
+#ratings["Hospital Selected"][rowLoc] = 'Yes'
+#if ratings["Hospital Selected"] == 'Yes':
+#ratings["Hospital"] = ratings['Hospital Selected']
+
+#ratings['rating_overall'] = ratings['rating_overall'].round()
+#ratings = ratings.sort_values(by ='rating_overall', ascending=True)
+
+#plot_opts = dict(show_legend=False, color_index='Hospital Selected', title="Overall Glassdoor Ratings", width=600, xlabel='Hospital', 
+#ylabel='Count in Class', ylim=(0, 8), xrotation=0)
+
+#style_opts = dict(box_color=hv.Cycle(['#30b2da', '#fd4f70']))
+
+
+#hist = hv.Histogram(ratings['rating_overall'])
+
+#bars = hv.Bars(ratings, hv.Dimension('Hospital'), ['rating_overall','Hospital Selected'])
+#bars = bars.opts(plot=plot_opts, style=style_opts)
+#hist * bars).opts(plot=plot_opts, style=style_opts)
+
+#st.write(hv.render(bars))
+
+
 #st.write('"Your hospital:" user_select')
 
-    #import plotly.express as px
-    fig2, ax = plt.subplots()
-    fig2 = ply.histogram(ratings, x='rating_overall')
-    st.plotly_chart(fig2)
 
-    h = user_select
-    ax.axvline(h, color='red', linewidth=2)
 
 #ax.hist(ratings['rating_overall'], color='blue', alpha=0.5, histtype='stepfilled')
 #h = ratings['Hosp_Name'].iloc[0]
@@ -147,3 +222,8 @@ if st.selectbox('Choose your hospital', ratings['Hosp_Name'].unique()):
 
 
 #st.dataframe(pd.read_csv('RelevantSurvey.csv'))
+st.markdown(
+"""
+Created by Timothy Divoll, Data Science Fellow at Insight in Boston, MA.
+"""
+)
