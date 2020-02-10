@@ -5,17 +5,6 @@ import os, sys
 import importlib.util
 import matplotlib.pyplot as plt
 import pickle
-import holoviews as hv
-import hvplot
-import hvplot.pandas # noqa: F401
-from holoviews import opts
-hv.extension('bokeh', logo=False)
-import bokeh.models as bmo
-from bokeh.plotting import figure, show
-from bokeh.palettes import PuBu, Spectral5, Spectral6
-from bokeh.io import show, output_notebook
-from bokeh.models import ColumnDataSource, HoverTool, LabelSet, CategoricalColorMapper
-from bokeh.transform import factor_cmap, factor_mark
 import altair as alt
 
 if len(sys.argv) > 1:
@@ -297,9 +286,10 @@ if st.button('Predict turnover'):
         st. markdown("""## Consider comparing your employee ratings to the distributions of ratings for all hospitals above. With such insights, you may find  employee sentement areas to focus on.""")
 st.markdown("""<br>""", unsafe_allow_html=True)
 
-
+st.markdown("""<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRRdpdML5T6oy_BdVU_HMtvlGpzvJPLol4dVvhfAwwEAxZuW9VcEnS62JI6ZxBxIPOmg2XTa4EbQevk/embed?start=false&loop=false&delayms=10000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>""", unsafe_allow_html=True
+)
 st.markdown(
 """
-Created by Timothy Divoll, Data Science Fellow at Insight in Boston, MA.
+Created by Timothy Divoll, Data Science Fellow at Insight Data Science in Boston, MA.
 """
 )
