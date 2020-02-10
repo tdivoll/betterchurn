@@ -249,11 +249,11 @@ st.markdown(""" ### Enter your staffing metrics in the boxes below to predict RN
 #model_in= data.drop(['label'], axis=1)
 
 st.markdown("""## **Nurse to patient ratio for Critical Care Unit (0-100):**""")
-RN_patient_critcare = st.number_input('Enter nurse/patient ratio in Critical Care:',min_value=0, max_value=100, value=14)
+RN_patient_critcare = st.number_input('Enter nurse/patient ratio in Critical Care:',min_value=0, max_value=100, value=16)
 
 st.markdown("""<br>""", unsafe_allow_html=True)
 st.markdown("""## **Nurse to patient ratio for Medical-Surgical Units (0-100):**""")
-RN_patient_medsurg = st.number_input('Enter nurse/patient ratio in Medical-Surgical:',min_value=0, max_value=100, value=10)
+RN_patient_medsurg = st.number_input('Enter nurse/patient ratio in Medical-Surgical:',min_value=0, max_value=100, value=7)
 
 st.markdown("""<br>""", unsafe_allow_html=True)
 st.markdown("""## **Percent non-contract RN in Critical Care Units (0-100):**""")
@@ -261,15 +261,15 @@ PerRNconCC = st.number_input('Enter' '%' 'hospital-employed RN in Critical Care:
 
 st.markdown("""<br>""", unsafe_allow_html=True)
 st.markdown("""## **Percent non-contract RN in Medical-Surgical Units (0-100):**""")
-PerRNconMS = st.number_input('Enter' '%' 'hospital-employed RN in Medical-Surgical:', min_value=0, max_value=100, value=75)
+PerRNconMS = st.number_input('Enter' '%' 'hospital-employed RN in Medical-Surgical:', min_value=0, max_value=100, value=72)
 
 st.markdown("""<br>""", unsafe_allow_html=True)
 st.markdown("""## **Percent Critical Care RN relative to LPN and CNA (0-100):**""")
-PerRNCC = st.number_input('Enter' '%' 'RN in Critical Care:',min_value=0, max_value=100, value=50)
+PerRNCC = st.number_input('Enter' '%' 'RN in Critical Care:',min_value=0, max_value=100, value=90)
 
 st.markdown("""<br>""", unsafe_allow_html=True)
 st.markdown("""## **Percent Medical-Surgical RN relative to LPN and CNA (0-100):**""")
-PerRNMS = st.number_input('Enter' '%' 'RN in Medical-Surgical:',min_value=0, max_value=100, value=50)
+PerRNMS = st.number_input('Enter' '%' 'RN in Medical-Surgical:',min_value=0, max_value=100, value=67)
 
 vals = [vals[0], vals[1], vals[2], vals[3], vals[4], vals[5], vals[6], vals[7], vals[8], vals[9], vals[10], vals[11], vals[12], PerRNCC, PerRNconCC, PerRNconMS, vals[16], PerRNMS, RN_patient_critcare, RN_patient_medsurg, vals[20], vals[21], vals[22], vals[23], vals[24], vals[25], vals[26], vals[27], vals[28], vals[29], vals[30], vals[31], vals[32], vals[33], vals[34], vals[35], vals[36], vals[37], vals[38], vals[39], vals[40], vals[41], vals[42], vals[43], vals[44], vals[45], vals[46], vals[47], vals[48], vals[49], vals[50], vals[51], vals[52], vals[53], vals[54], vals[55], vals[56], vals[57], vals[58], vals[59], vals[60], vals[61], vals[62], vals[63], vals[64], vals[65], vals[66], vals[67], vals[68], vals[69], vals[70], vals[71], vals[72], vals[73], vals[74], vals[75], vals[76], vals[77], vals[78], vals[79], vals[80], vals[81], vals[82], vals[83], vals[84], vals[85], vals[86], vals[87], vals[88], vals[89], vals[90], vals[91], vals[92], vals[93], vals[94], vals[95], vals[96], vals[97], vals[98], vals[99], vals[100], vals[101], vals[102], vals[103], vals[104], vals[105]]
 
