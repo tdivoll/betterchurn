@@ -47,7 +47,7 @@ body {
     """, unsafe_allow_html=True)
 
 
-st.title('BetterChuRN')
+st.title('betterchuRN')
 st.header("Predicting RN turnover rates with staffing metrics, patient reviews, employee sentiments, and demographics")
 st.markdown('<style>h1{color: teal;}</style>', unsafe_allow_html=True)
 st.markdown(
@@ -63,7 +63,7 @@ ratings['Overall Rating Score'] = selected
 print (selected)
 
 ###Give an indication of where the selected hospital stacks up against the others
-if selected <3.4187:
+if selected <3.4187: #mean of overall ratings
     st.markdown(''' ## Your overall rating is ___**lower**___ than average''')
 else:
     st.markdown(''' ## Your overall rating is ___**higher**___ than average''')
@@ -285,7 +285,8 @@ if st.button('Predict turnover'):
         st.markdown("""## Turnover at your hospital is ___**higher**___ than average.""")
         st. markdown("""## Consider comparing your employee ratings to the distributions of ratings for all hospitals above. With such insights, you may find  employee sentement areas to focus on.""")
 st.markdown("""<br>""", unsafe_allow_html=True)
-
+st.markdown("""<br>""", unsafe_allow_html=True)
+st.markdown("""<br>""", unsafe_allow_html=True)
 st.markdown("""<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRRdpdML5T6oy_BdVU_HMtvlGpzvJPLol4dVvhfAwwEAxZuW9VcEnS62JI6ZxBxIPOmg2XTa4EbQevk/embed?start=false&loop=false&delayms=10000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>""", unsafe_allow_html=True
 )
 st.markdown(
