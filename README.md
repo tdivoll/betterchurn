@@ -1,5 +1,5 @@
 # betterchuRN
-
+![betterchuRN](link-to-image)
 ### Insight Data Science Fellow Project - Boston 2020A
 
 This project uses a machine learning approach to predict turnover of registered nurses (RN) at 184 Illinois hospitals. The national average of nurse churn is 17% per year, and it costs an estimated $40-85k and 3 months time to replace a nurse. The general factors related to turnover in hospitals are salary, management style, workplace culture, and patient loads, but the interactions of these factors makes it hard for hospitals to assess the importance of each in this highly complex problem. Combining data sources on hospital and staffing metrics, patient survey responses, and employee sentiments, users can get predicted turnover rates and see how changes in staffing metrics and employee sentiments may change estimated turnover. With such insights, hospital administrators can learn about the importance of each focal area when turnover is an issue. The project is deployed as a streamlit [website application](https://betterchurn.herokuapp.com/) via heroku.
