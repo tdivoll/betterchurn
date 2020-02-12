@@ -1,5 +1,5 @@
 # betterchuRN
-<img src="./BetterChuRN.png" width="250" height="350">
+<img src="./BetterChuRN.png" width="300" height="200">
 
 ### Insight Data Science Fellow Project - Boston 2020A
 
