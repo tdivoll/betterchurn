@@ -29,7 +29,7 @@ def load_model(modelName):
   model=pd.read_pickle(os.path.join(folder, 'models', modelName + '.sav'))
   return model
 
-modelName = 'random_forest_week4'
+modelName = 'rf_week4'
 model = load_model(modelName)
 
 ratings = pd.read_csv('ReviewData.csv')
