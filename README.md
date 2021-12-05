@@ -10,7 +10,7 @@ This project uses a machine learning approach to predict turnover of registered 
 
 ## 1. Datasets
 
-*~20,000 rows of data on hospital and staffing metrics and patient review responses from the 2017&#150;2018 Medicare Hospital Consumer Assessment of Healthcare Providers and Systems (HCAHPS) survey downloaded and collated from Illinois Hospital Report Cards
+*~20,000 rows of data on hospital and staffing metrics and patient review responses from the 2017⁠–⁠2018 Medicare Hospital Consumer Assessment of Healthcare Providers and Systems (HCAHPS) survey downloaded and collated from Illinois Hospital Report Cards
 
 *~5,800 hospital employee review ratings scraped from Glassdoor; a small number of ratings were filled in from Indeed for       smaller hospitals without Glassdoor reviews
 
